@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF520C81-AA69-4146-9CBB-6ED4AFE89CA4}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LiteServerFrame</RootNamespace>
+    <AssemblyName>LiteServerFrame</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>../Libs/</OutputPath>
+    <DefineConstants>DEBUG;TRACE;ENABLELOG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>../Libs/</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Libs\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\General\Base\enRPCArgType.cs" />
+    <Compile Include="Core\General\Base\KCP\kcp.cs" />
+    <Compile Include="Core\General\Base\KCP\switch_queue.cs" />
+    <Compile Include="Core\General\Base\NetBuffer.cs" />
+    <Compile Include="Core\General\Base\NetMessage.cs" />
+    <Compile Include="Core\General\Base\ProtocolHead.cs" />
+    <Compile Include="Core\General\Base\RPCManager.cs" />
+    <Compile Include="Core\General\Base\RPCMessage.cs" />
+    <Compile Include="Core\General\Base\RPCMethodHelper.cs" />
+    <Compile Include="Core\General\Client\IConnection.cs" />
+    <Compile Include="Core\General\Client\KCPConnection.cs" />
+    <Compile Include="Core\General\Client\NetManager.cs" />
+    <Compile Include="Core\General\Server\GateWay.cs" />
+    <Compile Include="Core\General\Server\ISession.cs" />
+    <Compile Include="Core\General\Server\ISessionListener.cs" />
+    <Compile Include="Core\General\Server\KCPSession.cs" />
+    <Compile Include="Core\General\Server\NetManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\IPUtility.cs" />
+    <Compile Include="Utility\ProtoBuffUtility.cs" />
+    <Compile Include="Utility\TimeUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Debuger" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonData\CommonData.csproj">
+      <Project>{628b9541-6f35-47bc-b490-561dcba3b35f}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Debuger\Debuger.csproj">
+      <Project>{488f7c99-a53b-4a34-8c73-1133f8cf96a6}</Project>
+      <Name>Debuger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Debuger\Debuger.csproj">
+      <Project>{488f7c99-a53b-4a34-8c73-1133f8cf96a6}</Project>
+      <Name>Debuger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiteGameServer\LiteGameServer.csproj">
+      <Project>{a4bea743-c636-4c78-8b3b-d2422fe51058}</Project>
+      <Name>LiteGameServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
