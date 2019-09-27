@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Reflection;
 using System.Text;
-using DebugerTool;
+using GameFramework.Debug;
 using LiteServerFrame.Core.General.Base;
 using LiteServerFrame.Utility;
 
@@ -23,10 +24,10 @@ namespace LiteServerFrame.Core.General.Server
         private ISession currInvokingSession;
         private string currInvokingName;
 
-        public void Init(int port)
+        public void Init(enProtocolType type ,int port)
         {
             gateWay = new GateWay();
-            gateWay.Init(port, this);
+            gateWay.Init(type ,port, this);
             rpcManager = new RPCManager();
             rpcManager.Init();
         }
@@ -43,6 +44,16 @@ namespace LiteServerFrame.Core.General.Server
         public void SetAuthCmd(uint cmd)
         {
             authCmd = cmd;
+        }
+        
+        public void OnClientAccept(ISession session, IPEndPoint IpEndPoint)
+        {
+            Debuger.LogError("新客户端链接 "+IpEndPoint.Address+"  "+IpEndPoint.Port);
+        }
+
+        public void OnClientClose(ISession session, string info)
+        {
+            Debuger.LogError("客户端断开链接 "+info);
         }
         
         public void OnReceive(ISession session, byte[] bytes, int len)
@@ -73,7 +84,7 @@ namespace LiteServerFrame.Core.General.Server
                 }
             }
         }
-        
+
         //----------------------------------------------------------------------------
         
         public void RegisterRPCListener(object listener)
@@ -227,19 +238,26 @@ namespace LiteServerFrame.Core.General.Server
         
         private void HandlePrptoMessage(ISession session, NetMessage msg)
         {
-            var helper = listenerHelpers[msg.Head.cmd];
-            if (helper != null)
+            if (listenerHelpers.ContainsKey(msg.Head.cmd))
             {
-                object obj = ProtoBuffUtility.Deserialize(helper.typeMsg, msg.content);
-                if (obj != null)
+                var helper = listenerHelpers[msg.Head.cmd];
+                if (helper != null)
                 {
-                    helper.handleMsg.DynamicInvoke(session, msg.Head.index, obj);
+                    object obj = ProtoBuffUtility.Deserialize(helper.typeMsg, msg.content);
+                    if (obj != null)
+                    {
+                        helper.handleMsg.DynamicInvoke(session, msg.Head.index, obj);
+                    }
+                }else
+                {
+                    Debuger.LogWarning("未找到对应的监听者! cmd:{0}", msg.Head.cmd);
                 }
-            }
-            else
+                
+            }else
             {
                 Debuger.LogWarning("未找到对应的监听者! cmd:{0}", msg.Head.cmd);
             }
+           
         }
         
         public void Send<MsgType>(ISession session, uint index, uint cmd, MsgType msg)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
-using DebugerTool;
+using System.Net.Sockets;
+using GameFramework.Debug;
 using LiteServerFrame.Core.General.Base.KCP;
 using LiteServerFrame.Utility;
 
@@ -12,10 +13,10 @@ namespace LiteServerFrame.Core.General.Server
         
         private uint sessionId;
         private uint userId;
-        
         public uint id {get { return sessionId; }}
         public uint uid {get { return userId; }}
         public ushort ping { get; set; }
+        public Socket ConnentSocket { get; set; }
         public IPEndPoint remoteEndPoint { get; private set; }
 
         //发送消息的Action
@@ -131,6 +132,11 @@ namespace LiteServerFrame.Core.General.Server
             }
         }
 
+        public void SetSocket(Socket socket)
+        {
+            
+        }
+        
         public void Clean()
         {
             kcp?.Dispose();

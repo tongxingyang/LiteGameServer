@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using DebugerTool;
+using GameFramework.Debug;
 
 namespace LiteServerFrame.Core.General.Base
 {    

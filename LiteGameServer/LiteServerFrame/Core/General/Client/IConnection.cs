@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Sockets;
 
 namespace LiteServerFrame.Core.General.Client
 {

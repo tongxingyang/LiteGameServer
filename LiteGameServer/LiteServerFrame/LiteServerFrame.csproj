@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\General\Base\enProtocolType.cs" />
     <Compile Include="Core\General\Base\enRPCArgType.cs" />
     <Compile Include="Core\General\Base\KCP\kcp.cs" />
     <Compile Include="Core\General\Base\KCP\switch_queue.cs" />
+    <Compile Include="Core\General\Base\LengthEncoding.cs" />
     <Compile Include="Core\General\Base\NetBuffer.cs" />
     <Compile Include="Core\General\Base\NetMessage.cs" />
     <Compile Include="Core\General\Base\ProtocolHead.cs" />
@@ -53,15 +55,29 @@
     <Compile Include="Core\General\Base\RPCMethodHelper.cs" />
     <Compile Include="Core\General\Client\IConnection.cs" />
     <Compile Include="Core\General\Client\KCPConnection.cs" />
+    <Compile Include="Core\General\Client\MessageIndexGenerator.cs" />
     <Compile Include="Core\General\Client\NetManager.cs" />
+    <Compile Include="Core\General\Client\TCPConnection.cs" />
+    <Compile Include="Core\General\IPC\IPCConfig.cs" />
+    <Compile Include="Core\General\IPC\IPCInfo.cs" />
+    <Compile Include="Core\General\IPC\IPCManager.cs" />
+    <Compile Include="Core\General\IPC\IPCMessage.cs" />
+    <Compile Include="Core\General\MainLoop.cs" />
+    <Compile Include="Core\General\ServerModule\ServerModule.cs" />
+    <Compile Include="Core\General\ServerModule\ServerModuleConfig.cs" />
+    <Compile Include="Core\General\ServerModule\ServerModuleInfo.cs" />
+    <Compile Include="Core\General\ServerModule\ServerModuleManager.cs" />
     <Compile Include="Core\General\Server\GateWay.cs" />
     <Compile Include="Core\General\Server\ISession.cs" />
     <Compile Include="Core\General\Server\ISessionListener.cs" />
     <Compile Include="Core\General\Server\KCPSession.cs" />
     <Compile Include="Core\General\Server\NetManager.cs" />
+    <Compile Include="Core\General\Server\SessionIDGenerator.cs" />
+    <Compile Include="Core\General\Server\TCPSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\IPUtility.cs" />
     <Compile Include="Utility\ProtoBuffUtility.cs" />
+    <Compile Include="Utility\Singleton.cs" />
     <Compile Include="Utility\TimeUtility.cs" />
   </ItemGroup>
   <ItemGroup>

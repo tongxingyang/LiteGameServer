@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using DebugerTool;
+using GameFramework.Debug;
 using LiteServerFrame.Core.General.Base.KCP;
 using LiteServerFrame.Utility;
 
