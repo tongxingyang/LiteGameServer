@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="CommonData"
+                   namespace="CommonData.Data">
+
+  <class name="AccountData" table="user">
+    <id name="ID" column="id" type="Int32">
+      <generator class="native"></generator>
+    </id>
+    <property name="AccountName" column="username" type="String"></property>
+    <property name="Passworld" column="password" type="String"></property>
+    <property name="ServerID" column="servernum" type="Int32"></property>
+    <property name="RegisterTime" column="date" type="Date"></property>
+  </class>
+
+</hibernate-mapping>
