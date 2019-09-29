@@ -3,14 +3,20 @@ using System.Reflection;
 
 namespace LiteServerFrame.Core.General.Base
 {
-    public class RPCAttribute : Attribute
+    
+    public class RPCRequestAttribute : Attribute
     {
 
     }
 
-    public class RPCInvokeAttribute : Attribute
+    public class RPCResponseAttribute : Attribute
     {
 
+    }
+
+    public class RPCNotifyAttribute : Attribute
+    {
+        
     }
     
     public class RPCMethodHelper

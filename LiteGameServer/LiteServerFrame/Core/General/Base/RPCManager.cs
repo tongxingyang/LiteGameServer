@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using GameFramework.Debug;
 
 namespace LiteServerFrame.Core.General.Base
 {    
@@ -32,7 +31,7 @@ namespace LiteServerFrame.Core.General.Base
         {
             if (!listenerList.Contains(listener))
             {
-                Debuger.Log("{0}", listener.GetType().Name);
+                GameFramework.Debug.Debuger.Log("{0}", listener.GetType().Name);
                 listenerList.Add(listener);
             }
         }
@@ -41,7 +40,7 @@ namespace LiteServerFrame.Core.General.Base
         {
             if (listenerList.Contains(listener))
             {
-                Debuger.Log("{0}", listener.GetType().Name);
+                GameFramework.Debug.Debuger.Log("{0}", listener.GetType().Name);
                 listenerList.Remove(listener);
             }
         }
@@ -88,7 +87,7 @@ namespace LiteServerFrame.Core.General.Base
                     sb.AppendFormat("\t<name:{0}, \tmethod:{1}.{2}>\n", pair.Key, helper.method.DeclaringType.Name, helper.method.Name);
             }
 
-            Debuger.LogWarning("\nRPC Cached Methods ({0}):\n{1}", methodHelpers.Count, sb);
+            GameFramework.Debug.Debuger.LogWarning("\nRPC Cached Methods ({0}):\n{1}", methodHelpers.Count, sb);
         }
 
     }

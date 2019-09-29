@@ -9,7 +9,7 @@ namespace LiteServerFrame.Core.General.Server
 {
     public class KCPSession : ISession
     {
-        public static int ActiveTimeout = 30;
+        public static int ActiveTimeout = 60;
         
         private uint sessionId;
         private uint userId;

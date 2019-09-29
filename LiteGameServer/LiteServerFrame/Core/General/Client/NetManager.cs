@@ -14,7 +14,6 @@ namespace LiteServerFrame.Core.General.Client
         class ListenerHelper
         {
             public uint cmd;
-            public uint index;
             public Type typeMsg;
             public Delegate successHandle;
             public Delegate errorHandle;
@@ -97,7 +96,7 @@ namespace LiteServerFrame.Core.General.Client
                     if (dt >= currentHelper.timeout)
                     {
                         rspHelpers.Remove(listenerHelper.Key);
-                        currentHelper.successHandle?.DynamicInvoke(enNetErrorCode.Timeout);
+                        currentHelper.errorHandle?.DynamicInvoke(enNetErrorCode.Timeout);
                     }
                     Debuger.LogWarning("cmd:{0} Is Timeout!", currentHelper.cmd);
                 }
@@ -312,7 +311,7 @@ namespace LiteServerFrame.Core.General.Client
 
         //一问一答方式
         public void Send<TReq, TRsp>(uint cmd, TReq req, Action<TRsp> successHandle, float timeOut = 30,
-            Action<int> errorHandle = null)
+            Action<enNetErrorCode> errorHandle = null)
         {
             NetMessage message = new NetMessage
             {
@@ -328,17 +327,15 @@ namespace LiteServerFrame.Core.General.Client
             byte[] temp;
             int len = message.Serialize(out temp);
             connection.Send(temp, len);
-            AddListener(cmd, typeof(TRsp), successHandle, message.Head.index, timeOut, errorHandle);
+            AddListener(cmd, successHandle, message.Head.index, timeOut, errorHandle);
         }
 
-        private void AddListener(uint cmd, Type TRsp, Delegate successHandle, uint index, float timeout,
-            Action<int> errorHandle)
+        private void AddListener<TRsp>(uint cmd, Action<TRsp> successHandle, uint index, float timeout, Action<enNetErrorCode> errorHandle)
         {
             ListenerHelper helper = new ListenerHelper()
             {
                 cmd = cmd,
-                index = index,
-                typeMsg = TRsp,
+                typeMsg = typeof(TRsp),
                 successHandle = successHandle,
                 errorHandle = errorHandle,
                 timeout = timeout,

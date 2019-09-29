@@ -10,7 +10,7 @@ namespace LiteServerFrame.Core.General.Server
 {
     public class TCPSession : ISession
     {
-        public static int ActiveTimeout = 30;
+        public static int ActiveTimeout = 60;
         
         public uint id { get; }
         public uint uid { get; set; }

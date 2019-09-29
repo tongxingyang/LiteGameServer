@@ -74,14 +74,12 @@
     <Compile Include="Core\General\Server\NetManager.cs" />
     <Compile Include="Core\General\Server\SessionIDGenerator.cs" />
     <Compile Include="Core\General\Server\TCPSession.cs" />
+    <Compile Include="Debuger\ConsoleInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\IPUtility.cs" />
     <Compile Include="Utility\ProtoBuffUtility.cs" />
     <Compile Include="Utility\Singleton.cs" />
     <Compile Include="Utility\TimeUtility.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Debuger" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonData\CommonData.csproj">
