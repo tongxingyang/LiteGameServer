@@ -58,6 +58,10 @@
     <Compile Include="Core\General\Client\MessageIndexGenerator.cs" />
     <Compile Include="Core\General\Client\NetManager.cs" />
     <Compile Include="Core\General\Client\TCPConnection.cs" />
+    <Compile Include="Core\General\FSP\Client\FPSManager.cs" />
+    <Compile Include="Core\General\FSP\Client\FSPClient.cs" />
+    <Compile Include="Core\General\FSP\Client\FSPFrameController.cs" />
+    <Compile Include="Core\General\FSP\FSPGameState.cs" />
     <Compile Include="Core\General\IPC\IPCConfig.cs" />
     <Compile Include="Core\General\IPC\IPCInfo.cs" />
     <Compile Include="Core\General\IPC\IPCManager.cs" />
@@ -98,6 +102,9 @@
       <Project>{a4bea743-c636-4c78-8b3b-d2422fe51058}</Project>
       <Name>LiteGameServer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\General\FSP\Server" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
