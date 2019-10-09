@@ -36,16 +36,16 @@ namespace CommonData.Proto
     [ProtoContract]
     public class FSPDataSToC
     {
-        [ProtoMember(1)] public List<FSPFrameData> frames = new List<FSPFrameData>();
-//        [ProtoMember(1)] public FSPFrameData frame;
+//        [ProtoMember(1)] public List<FSPFrameData> frames = new List<FSPFrameData>();
+        [ProtoMember(1)] public FSPFrameData frame;
     }
 
     [ProtoContract]
     public class FSPDataCToS
     {
         [ProtoMember(1)] public uint sessionID = 0;
-        [ProtoMember(2)] public List<FSPMessage> msgs = new List<FSPMessage>();
-//        [ProtoMember(2)] public FSPMessage msg;
+//        [ProtoMember(2)] public List<FSPMessage> msgs = new List<FSPMessage>();
+        [ProtoMember(2)] public FSPMessage msg;
     }
 
     /// <summary>
@@ -62,7 +62,6 @@ namespace CommonData.Proto
         {
             return (msgs == null || msgs.Count == 0);
         }
-
 
         public bool Contains(int cmd)
         {

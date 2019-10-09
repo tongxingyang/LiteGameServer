@@ -10,6 +10,15 @@ namespace LiteServerFrame.Utility
         public static IPEndPoint IPEPIPv4Any = new IPEndPoint(IPAddress.Any, 0);
         public static IPEndPoint IPEPIPv6Any = new IPEndPoint(IPAddress.IPv6Any, 0);
         
+        public static string SelfIP
+        {
+            get
+            {
+                IPAddress[] addressList = Dns.GetHostAddresses("127.0.0.1"); 
+                return addressList[0].ToString();
+            }
+        }
+        
         public static IPEndPoint GetIPEndPointAny(AddressFamily family, int port)
         {
             if (family == AddressFamily.InterNetwork)

@@ -53,8 +53,54 @@ namespace LiteServerFrame.Core.General.FSP.Client
                 {
                     newFrameCount -= defaultSpeed;
                     int speedUpFrameNum = newFrameCount - JitterBufferSize;
+                    if (speedUpFrameNum >= clientFrameRateMultiple)
+                    {
+                        if (enableSpeedUp)
+                        {
+                            speed = 2;
+                            if (speedUpFrameNum > 100)
+                            {
+                                speed = 8;
+                            }
+                            else if (speedUpFrameNum > 50)
+                            {
+                                speed = 4;
+                            }
+                        }
+                        else
+                        {
+                            speed = defaultSpeed;
+                        }
+                    }
+                    else
+                    {
+                        speed = defaultSpeed;
+
+                        if (enableAutoBuff)
+                        {
+                            autoBuffCnt--;
+                            if (autoBuffCnt <= 0)
+                            {
+                                autoBuffCnt = autoBuffInterval;
+                                if (speedUpFrameNum < clientFrameRateMultiple - 1)
+                                {
+                                    speed = 0;
+                                }
+                            }
+                        }
+                    }
                 }
             }
+            else
+            {
+                int speedUpFrameNum = newFrameCount - JitterBufferSize;
+                if (speedUpFrameNum > 0)
+                {
+                    isInBuffing = false;
+                }
+            }
+            
+            isInBuffing = speed > defaultSpeed;
             return speed;
         }
     }

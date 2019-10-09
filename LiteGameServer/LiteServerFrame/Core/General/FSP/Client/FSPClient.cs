@@ -42,7 +42,7 @@ namespace LiteServerFrame.Core.General.FSP.Client
             tempSendData = new FSPDataCToS();
             recvBuffQueue = new SwitchQueue<byte[]>();
             tempSendData.sessionID = sessionid;
-            tempSendData.msgs.Add(new FSPMessage());
+            tempSendData.msg = new FSPMessage();
             kcp = new KCP(sessionid, HandleKcpSend);
             kcp.NoDelay(1, 10, 2, 1);
             kcp.WndSize(128, 128);
@@ -195,13 +195,7 @@ namespace LiteServerFrame.Core.General.FSP.Client
                     {
                         lastRecvTimestamp = (uint)TimeUtility.GetTotalMillisecondsSince1970();
                         var data = ProtoBuffUtility.Deserialize<FSPDataSToC>(recvBuffer);
-                        if (recvListener != null)
-                        {
-                            foreach (FSPFrameData frame in data.frames)
-                            {
-                                recvListener(frame);
-                            }
-                        }
+                        recvListener?.Invoke(data.frame);
                     }
                 }
             }
@@ -221,7 +215,7 @@ namespace LiteServerFrame.Core.General.FSP.Client
         {
             if (isRunning)
             {
-                FSPMessage msg = tempSendData.msgs[0];
+                FSPMessage msg = tempSendData.msg;
                 msg.cmd = cmd;
                 msg.clientFrameID = clientFrameID;
                 msg.args = args;

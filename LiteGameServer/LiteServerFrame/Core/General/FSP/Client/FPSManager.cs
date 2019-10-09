@@ -39,7 +39,7 @@ namespace LiteServerFrame.Core.General.FSP.Client
 
             if (param.useLocal)
             {
-                serverLockedFrameIndex = 0;
+                serverLockedFrameIndex = fspParam.maxFrameID;
             }
             else
             {
@@ -159,10 +159,8 @@ namespace LiteServerFrame.Core.General.FSP.Client
                 if (serverLockedFrameIndex == 0 || serverLockedFrameIndex > clientCurrentFrameIndex)
                 {
                     clientCurrentFrameIndex++;
-                    if (frameDatas.ContainsKey(clientCurrentFrameIndex))
-                    {
-                        ExecuteFrame(clientCurrentFrameIndex,frameDatas[clientCurrentFrameIndex]);
-                    }
+                    ExecuteFrame(clientCurrentFrameIndex,
+                        frameDatas.ContainsKey(clientCurrentFrameIndex) ? frameDatas[clientCurrentFrameIndex] : null);
                 }
             }
             else
@@ -174,10 +172,10 @@ namespace LiteServerFrame.Core.General.FSP.Client
                     if (clientCurrentFrameIndex < serverLockedFrameIndex)
                     {
                         clientCurrentFrameIndex++;
-                        if (frameDatas.ContainsKey(clientCurrentFrameIndex))
-                        {
-                            ExecuteFrame(clientCurrentFrameIndex,frameDatas[clientCurrentFrameIndex]);
-                        }
+                        ExecuteFrame(clientCurrentFrameIndex,
+                            frameDatas.ContainsKey(clientCurrentFrameIndex)
+                                ? frameDatas[clientCurrentFrameIndex]
+                                : null);
                     }
                     speed--;
                 }
@@ -209,7 +207,7 @@ namespace LiteServerFrame.Core.General.FSP.Client
 
             if (fspParam.useLocal)
             {
-                serverLockedFrameIndex = 0;
+                serverLockedFrameIndex = fspParam.maxFrameID;
             }
             else
             {
